@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
-const Helps = require('../schemas/helps');
+require('dotenv').config();
 
-// Função para conectar no MongoDB (só conecta se ainda não estiver conectado)
+// 📦 Schema Helps definido direto aqui
+const helpSchema = new mongoose.Schema({
+    comando: { type: String, required: true },
+    categoria: { type: String, required: true },
+    descricao: { type: String, required: true }
+});
+const Helps = mongoose.models.Helps || mongoose.model('Helps', helpSchema);
+
+// 🔗 Função para conectar ao MongoDB
 async function conectarMongoDB() {
     if (mongoose.connection.readyState === 0) { // 0 = desconectado
         try {
@@ -9,7 +17,7 @@ async function conectarMongoDB() {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             });
-            console.log('✅ Conectado ao MongoDB (rota /api/comandos)');
+            console.log('✅ Conectado ao MongoDB (/api/comandos)');
         } catch (err) {
             console.error('❌ Erro ao conectar ao MongoDB:', err.message);
             throw new Error('Falha na conexão com o banco');
@@ -19,10 +27,10 @@ async function conectarMongoDB() {
 
 module.exports = async (req, res) => {
     try {
-        // Conecta ao banco antes de buscar os comandos
+        // Conectar ao banco
         await conectarMongoDB();
 
-        // Busca todos os comandos e remove o campo "_id"
+        // Buscar todos os comandos e remover o _id
         const comandos = await Helps.find().lean();
 
         const comandosSemId = comandos.map(cmd => ({
