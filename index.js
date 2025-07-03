@@ -26,6 +26,7 @@ if (fs.existsSync(handlersPath)) {
     });
 }
 
+
 // 🌐 Carregar rotas da pasta Pages como APIs (ex: /api/comandos)
 const pagesPath = path.join(__dirname, 'Pages');
 if (fs.existsSync(pagesPath)) {
