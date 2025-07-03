@@ -6,7 +6,7 @@ const app = express();
 const PORT = 3000;
 
 // Pastas que o sistema vai monitorar
-const pastas = ['schemas', 'handlers', 'Pages', 'módulo', 'css'];
+const pastas = ['schemas', 'handlers', 'Pages', 'modulo', 'css'];
 
 // Carregar módulos da pasta handlers
 function carregarHandlers() {
