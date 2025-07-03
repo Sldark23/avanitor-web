@@ -1,20 +1,14 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 module.exports = async (app) => {
-    const mongoURI = process.env.MONGO_URI;
-
-    if (!mongoURI) {
-        console.error('❌ Erro: MONGO_URI não encontrado no arquivo .env');
-        return;
-    }
-
     try {
-        await mongoose.connect(mongoURI, {
+        await mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
-            useUnifiedTopology: true,
+            useUnifiedTopology: true
         });
-        console.log('✅ Conectado ao MongoDB com sucesso!');
-    } catch (error) {
-        console.error('❌ Erro ao conectar ao MongoDB:', error.message);
+        console.log('✅ Conectado ao MongoDB');
+    } catch (err) {
+        console.error('❌ Erro ao conectar ao MongoDB:', err.message);
     }
 };
