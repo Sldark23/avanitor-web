@@ -1,0 +1,14 @@
+{
+  "name": "meu-framework",
+  "version": "1.0.0",
+  "description": "Framework base em Express para montar sites com auto-load e hot reload.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Lorde",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
