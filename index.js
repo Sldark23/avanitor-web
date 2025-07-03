@@ -25,7 +25,13 @@ if (fs.existsSync(handlersPath)) {
         }
     });
 }
-
+// Conecta ao MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log('✅ Conectado ao MongoDB'))
+.catch(err => console.error('❌ Erro ao conectar ao MongoDB:', err));
 
 // 🌐 Carregar rotas da pasta Pages como APIs (ex: /api/comandos)
 const pagesPath = path.join(__dirname, 'Pages');
