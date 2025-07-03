@@ -1,0 +1,17 @@
+[
+    {
+        "comando": "ping",
+        "categoria": "Utilidade",
+        "descricao": "Mostra o ping do bot"
+    },
+    {
+        "comando": "ban",
+        "categoria": "Moderação",
+        "descricao": "Bane um usuário do servidor"
+    },
+    {
+        "comando": "kick",
+        "categoria": "Moderação",
+        "descricao": "Expulsa um usuário do servidor"
+    }
+]
