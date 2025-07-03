@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Comandos - avanitor Bot</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #eee;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            max-width: 700px;
+            margin: auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #1e1e1e;
+            margin-bottom: 10px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        .comando {
+            font-weight: bold;
+            font-size: 18px;
+            color: #5865F2;
+        }
+        .categoria {
+            font-style: italic;
+            color: #999;
+            margin-left: 10px;
+        }
+        .descricao {
+            margin-top: 5px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>📜 Lista de Comandos</h1>
+    <ul id="comandos-lista"></ul>
+
+    <script>
+        async function carregarComandos() {
+            try {
+                const res = await fetch('/api/comandos');
+                const data = await res.json();
+                const lista = document.getElementById('comandos-lista');
+                lista.innerHTML = '';
+
+                if (!data.sucesso) {
+                    lista.innerHTML = '<li>Erro ao carregar comandos.</li>';
+                    return;
+                }
+
+                if (data.comandos.length === 0) {
+                    lista.innerHTML = '<li>Nenhum comando encontrado.</li>';
+                    return;
+                }
+
+                data.comandos.forEach(cmd => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span class="comando">${cmd.comando}</span>
+                        <span class="categoria">[${cmd.categoria}]</span>
+                        <div class="descricao">${cmd.descricao}</div>
+                    `;
+                    lista.appendChild(li);
+                });
+            } catch (error) {
+                const lista = document.getElementById('comandos-lista');
+                lista.innerHTML = '<li>Erro ao carregar comandos.</li>';
+                console.error('Erro no fetch:', error);
+            }
+        }
+
+        // Carrega os comandos quando a página abrir
+        window.onload = carregarComandos;
+    </script>
+</body>
+</html>
