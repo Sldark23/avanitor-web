@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Helps = require('../schemas/helps');
-require('dotenv').config();
 
 // Função para conectar no MongoDB (só conecta se ainda não estiver conectado)
 async function conectarMongoDB() {
